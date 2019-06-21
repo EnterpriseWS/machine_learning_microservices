@@ -6,7 +6,7 @@ import numpy
 
 def start_training(csv_file):
     ml = TicTacToeNetTraining()
-    ml.start(csv_file)
+    ml.train_deep_multineuron(csv_file)
     ml.save_model()
     ml.save_weight()
 
@@ -18,7 +18,46 @@ class TicTacToeNetTraining:
     def __init__(self):
         return
 
-    def start(self, csv_file):
+    def train_shallow_multineuron(self, csv_file):
+        self.file_base = csv_file
+        numpy.random.seed(7)
+        game_states = numpy.loadtxt(csv_file+'.csv', delimiter=',')
+        # expected input and output for neural net
+        state_input = game_states[:, 0:9]
+        state_output = game_states[:, 10:19]
+
+        self.net_model.add(Dense(90, input_dim=9, activation='relu'))  # hidden layer
+        self.net_model.add(Dense(9, activation='sigmoid'))  # output layer
+        self.net_model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
+        self.net_model.summary()
+        # Fit the model
+        self.net_model.fit(state_input, state_output, epochs=30, batch_size=500)
+        # evaluate the model
+        scores = self.net_model.evaluate(state_input, state_output)
+        print("\n%s: %.2f%%" % (self.net_model.metrics_names[1], scores[1]*100))
+
+    def train_deep_multineuron(self, csv_file):
+        self.file_base = csv_file
+        numpy.random.seed(7)
+        game_states = numpy.loadtxt(csv_file+'.csv', delimiter=',')
+        # expected input and output for neural net
+        state_input = game_states[:, 0:9]
+        # state_output = keras.utils.to_categorical(numpy.rint((game_states[:, 9]*10)-1), num_classes=10)
+        state_output = game_states[:, 10:19]
+
+        self.net_model.add(Dense(90, input_dim=9, activation='relu'))  # hidden layer 1
+        self.net_model.add(Dense(90, activation='relu'))  # hidden layer 2
+        # self.net_model.add(Dense(90, activation='relu'))  # hidden layer 3
+        self.net_model.add(Dense(9, activation='sigmoid'))  # output layer
+        self.net_model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
+        self.net_model.summary()
+        # Fit the model
+        self.net_model.fit(state_input, state_output, epochs=30, batch_size=500)
+        # evaluate the model
+        scores = self.net_model.evaluate(state_input, state_output)
+        print("\n%s: %.2f%%" % (self.net_model.metrics_names[1], scores[1]*100))
+
+    def train_general(self, csv_file):
         self.file_base = csv_file
         numpy.random.seed(7)
         game_states = numpy.loadtxt(csv_file+'.csv', delimiter=',')
