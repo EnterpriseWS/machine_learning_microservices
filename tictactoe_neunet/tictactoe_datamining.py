@@ -162,8 +162,8 @@ class GameState(Base):
 if __name__ == '__main__':
     import sys
     if len(sys.argv) >= 5:
-        extract_state_single_neuron(sys.argv[1], sys.argv[2], int(sys.argv[3]), int(sys.argv[4]))
+        extract_state_multiple_neuron(sys.argv[1], sys.argv[2], int(sys.argv[3]), int(sys.argv[4]))
     elif len(sys.argv) == 4:
-        extract_state_single_neuron(sys.argv[1], sys.argv[2], int(sys.argv[3]), 99999999)
+        extract_state_multiple_neuron(sys.argv[1], sys.argv[2], int(sys.argv[3]), 99999999)
     else:
         print('Error: Please enter at least two argument')
