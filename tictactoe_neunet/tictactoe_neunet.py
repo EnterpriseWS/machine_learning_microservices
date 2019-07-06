@@ -6,7 +6,10 @@ from numpy import array
 # os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2
 
 api = Flask(__name__)
-tested_input = array([[1,-1,-1,1,1,-1,0,0,0],[1,1,-1,-1,0,0,0,0,0]])
+tested_input = array([[1,-1,-1,1,1,-1,0,0,0]
+                    ,[1,1,-1,-1,0,0,0,0,0]
+                    ,[1,1,-1,-1,1,0,0,-1,0]
+                    ,[1,-1,-1,0,1,1,0,0,-1]])
 
 
 def start_game(is_max):
@@ -14,18 +17,18 @@ def start_game(is_max):
 
 
 def get_next_move(opponent_move):
-    ml = TicTacToePredict()
+    ml = TicTacToeNeunet()
     ml.predict_by_matrix()
     return
 
 
 def get_next_move_by_matrix(input_matrix):
-    ml = TicTacToePredict()
+    ml = TicTacToeNeunet()
     ml.predict_by_matrix(input_matrix)
     return
 
 
-class TicTacToePredict:
+class TicTacToeNeunet:
     weight_file = ''
     model_file = ''
 
@@ -51,6 +54,7 @@ class TicTacToePredict:
         loaded_model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
         # load weights into new model
         loaded_model.load_weights(self.weight_file)
+        # output_matrix = loaded_model.predict(input_matrix)
         output_matrix = loaded_model.predict_classes(input_matrix)
         # output_matrix = loaded_model.predict_proba(input_matrix)
         for idx in range(len(input_matrix)):

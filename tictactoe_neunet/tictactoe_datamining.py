@@ -21,7 +21,7 @@ engine = create_engine('sqlite:///tic-tac-toe.db', echo=False)
 Session = sessionmaker(bind=engine)
 
 
-def extract_state_single_neuron(cvs_file, winner, begin_id, end_id):
+def extract_state_single_neuron(csv_file, winner, begin_id, end_id):
     Base.metadata.create_all(engine)
     session = Session()
     counter = 0
@@ -71,7 +71,7 @@ def extract_state_single_neuron(cvs_file, winner, begin_id, end_id):
                       + ' convert to ' + str(the_input)
                       + ' output as ' + str(the_output))
                 the_input.extend(the_output)
-                with open(cvs_file, 'a') as csv_fd:
+                with open(csv_file+'.csv', 'a') as csv_fd:
                     writer = csv.writer(csv_fd)
                     writer.writerow(the_input)
             counter += 1
@@ -83,7 +83,7 @@ def extract_state_single_neuron(cvs_file, winner, begin_id, end_id):
     print(str(counter) + ' data set has been converted.')
 
 
-def extract_state_multiple_neuron(cvs_file, winner, begin_id, end_id):
+def extract_state_multiple_neuron(csv_file, winner, begin_id, end_id):
     Base.metadata.create_all(engine)
     session = Session()
     counter = 0
@@ -133,7 +133,7 @@ def extract_state_multiple_neuron(cvs_file, winner, begin_id, end_id):
                       + ' convert to ' + str(the_input)
                       + ' output as ' + str(the_output))
                 the_input.extend(the_output)
-                with open(cvs_file, 'a') as csv_fd:
+                with open(csv_file+'.csv', 'a') as csv_fd:
                     writer = csv.writer(csv_fd)
                     writer.writerow(the_input)
             counter += 1
