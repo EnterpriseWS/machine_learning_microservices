@@ -6,10 +6,18 @@ from numpy import array
 # os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2
 
 api = Flask(__name__)
+
+# Get next move for X
 tested_input = array([[1,-1,-1,1,1,-1,0,0,0]
                     ,[1,1,-1,-1,0,0,0,0,0]
                     ,[1,1,-1,-1,1,0,0,-1,0]
                     ,[1,-1,-1,0,1,1,0,0,-1]])
+
+# Get next move for O
+# tested_input = array([[-1,0,0,1,-1,0,1,1,0]
+#                     ,[0,-1,1,0,1,0,0,0,0]
+#                     ,[1,-1,0,0,-1,0,1,1,0]
+#                     ,[1,0,-1,-1,1,1,0,1,-1]])
 
 
 def start_game(is_max):
@@ -33,8 +41,8 @@ class TicTacToeNeunet:
     model_file = ''
 
     def __init__(self):
-        self.model_file = 'tic-tac-toe-x-model.json'
-        self.weight_file = 'tic-tac-toe-x-weight.h5'
+        self.model_file = 'tic-tac-toe-single-x-model.json'
+        self.weight_file = 'tic-tac-toe-single-x-weight.h5'
         return
 
     # def __init__(self, model, weight):
@@ -54,8 +62,8 @@ class TicTacToeNeunet:
         loaded_model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
         # load weights into new model
         loaded_model.load_weights(self.weight_file)
-        # output_matrix = loaded_model.predict(input_matrix)
-        output_matrix = loaded_model.predict_classes(input_matrix)
+        output_matrix = loaded_model.predict(input_matrix)
+        # output_matrix = loaded_model.predict_classes(input_matrix)
         # output_matrix = loaded_model.predict_proba(input_matrix)
         for idx in range(len(input_matrix)):
             print('board_state=%s, next_move=%s' % (input_matrix[idx], output_matrix[idx]))
