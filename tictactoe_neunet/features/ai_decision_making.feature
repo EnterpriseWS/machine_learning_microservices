@@ -4,21 +4,21 @@ Feature: AI Decision Making
   file will be followed.
 
   Scenario: None scenario occurs in basic_decision_making
-    Given
-    When
-    Then
+    Given condition 1
+    When action 1
+    Then assert 1
 
   Scenario: Find all executable moves
-    Given
-    When
-    Then
+    Given condition 2
+    When action 2
+    Then assert 2
 
   Scenario: Find probabilities of all next moves
-    Given
-    When
-    Then
+    Given condition 3
+    When action 3
+    Then assert 3
 
   Scenario: Find the best probability among all executable moves
-    Given
-    When
-    Then
+    Given condition 4
+    When action 4
+    Then assert 4
