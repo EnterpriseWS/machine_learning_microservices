@@ -2,30 +2,30 @@ from behave import *
 
 
 @given('a board state that 2 Xs in a row or diagonal')
-@given('X is the next player')
 def step_impl(context):
     pass
 
 
 @given('a board state that 2 Os in a row or diagonal')
-@given('O is the next player')
 def step_impl(context):
     pass
 
 
-@given('a board state that 2 Os in a row or diagonal')
 @given('X is the next player')
 def step_impl(context):
     pass
 
 
-@given('a board state that 2 Xs in a row or diagonal')
 @given('O is the next player')
 def step_impl(context):
     pass
 
 
 @given('a board state that only a cell open')
+def step_impl(context):
+    pass
+
+
 @given('either X or O is the next player')
 def step_impl(context):
     pass

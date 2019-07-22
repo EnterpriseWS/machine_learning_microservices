@@ -4,7 +4,7 @@ Feature: Basic Decision Flow
   Again, this feature focus on the state change when an action is applied.
 
   Scenario: X becomes the winner
-    Given board states listed as below that 2 Xs in a row or diagonal
+    Given board states listed as below that 2 Xs and 1 empty in a row or diagonal
     | game |    state     |
     |  1   |X,O,O,X,X,O,,,|
     |  2   |X,,,,X,,O,O,  |
@@ -16,7 +16,7 @@ Feature: Basic Decision Flow
     Then X becomes the winner
 
   Scenario: O becomes the winner
-    Given board states listed as below that 2 Os in a row or diagonal
+    Given board states listed as below that 2 Os and 1 empty in a row or diagonal
     | game |     state     |
     |  1   |X,X,O,O,O,,X,X,|
     |  2   |X,,,X,O,,O,X,  |
@@ -28,7 +28,7 @@ Feature: Basic Decision Flow
     Then O becomes the winner
 
   Scenario: Block X
-    Given a board state that 2 Xs in a row or diagonal
+    Given a board state that 2 Xs and 1 empty in a row or diagonal
     | game |    state    |
     |  1   |X,O,O,X,X,,,,|
     |  2   |X,X,,O,,,,,  |
@@ -40,7 +40,7 @@ Feature: Basic Decision Flow
     Then X is forced to move to other cell
 
   Scenario: Block O
-    Given a board state that 2 Os in a row or diagonal
+    Given a board state that 2 Os and 1 empty in a row or diagonal
     | game |     state    |
     |  1   |X,,,,X,,O,O,  |
     |  2   |X,X,O,O,O,,X,,|
